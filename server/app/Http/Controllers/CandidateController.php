@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Action\UpdateCandidateAction;
 use App\Http\Requests\StoreCandidateRequest;
 use App\Http\Requests\UpdateCandidateRequest;
 use App\Models\Candidate;
 use App\Models\DesiredPosition;
 use App\Models\Specialization;
 use App\ViewModel\CandidatesTableFilter;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
@@ -19,21 +19,14 @@ class CandidateController extends Controller
      */
     public function index(Request $request)
     {
-//
-//        // Получаем данные с пагинацией
-//        $candidates = Candidate::with(['desiredPositions', 'specializations'])
-//            ->paginate(10); // Количество элементов на странице
 
         $query = (new CandidatesTableFilter())->find($request);
 
-        // Пагинация
         $perPage = 10;
         $currentPage = $request->input('page', 1);
 
-        // Получение общей информации о пагинаторе без фактической пагинации
         $paginator = $query->paginate($perPage);
 
-        // Если текущая страница больше максимального количества страниц, сброс на первую
         if ($currentPage > $paginator->lastPage()) {
             $currentPage = 1;
         }
@@ -53,7 +46,6 @@ class CandidateController extends Controller
      */
     public function create()
     {
-        // dd (compact('desiredPositions', 'specializations'));
         return view('candidates.create', [
             'desiredPositions' => DesiredPosition::all(),
             'specializations' => Specialization::all(),
@@ -66,7 +58,11 @@ class CandidateController extends Controller
      */
     public function store(StoreCandidateRequest $request)
     {
-        //
+        $candidate = new Candidate();
+        (new UpdateCandidateAction())($candidate, $request);
+        return redirect()
+            ->route('candidates.index')
+            ->with('success', sprintf('Candidate %s created!', $candidate->id));
     }
 
     /**
@@ -82,7 +78,12 @@ class CandidateController extends Controller
      */
     public function edit(Candidate $candidate)
     {
-        //
+        // dd (compact('desiredPositions', 'specializations'));
+        return view('candidates.edit', [
+            'candidate' =>  $candidate,
+            'desiredPositions' => DesiredPosition::all(),
+            'specializations' => Specialization::all(),
+        ]);
     }
 
     /**
@@ -91,6 +92,10 @@ class CandidateController extends Controller
     public function update(UpdateCandidateRequest $request, Candidate $candidate)
     {
         //
+        (new UpdateCandidateAction())($candidate, $request);
+        return redirect()
+            ->route('candidates.index')
+            ->with('success', sprintf('Candidate %s updated!', $candidate->id));
     }
 
     /**

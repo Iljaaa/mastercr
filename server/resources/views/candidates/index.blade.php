@@ -45,21 +45,29 @@ function confirmDelete(event, url) {
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<div style="border: solid 1px red">
-    add button
-    delete button
+<div class="container mt-2">
+    <a href="{{ route('candidates.create') }}" class="btn btn-primary">Create new candidate</a>
+
+    @if (session('success'))
+        <div class="alert alert-success mt-2">
+            {{ session('success') }}
+        </div>
+    @endif
 </div>
 
-<div style="overflow: scroll; border: solid 1px red; height: 80vh">
+<div style="overflow: scroll; height: 80vh" class="mt-2">
     <form method="get" name="filterForm">
         <input type="hidden" name="page" id="page" value="{{ $currentPage }}" />
         @include('candidates.table')
     </form>
 </div>
 
-<div class="pagination mt-2">
-    {{ $candidates->links('candidates.pagination', ['currentPage' => $currentPage]) }}
+<div class="container">
+    <div class="pagination mt-2">
+        {{ $candidates->links('candidates.pagination', ['currentPage' => $currentPage]) }}
+    </div>
 </div>
+
 
 @endsection
 

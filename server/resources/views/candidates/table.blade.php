@@ -206,7 +206,7 @@ $genders = __('messages.genders');
                     </ul>
                 @endif
                 <div class="mt-2">
-                    Желаемая ЗП: {{ $candidate->salary }}
+                    Желаемая ЗП: {{ number_format($candidate->salary, 2, ',', ' ') }}
                 </div>
             </td>
             <td>
@@ -242,9 +242,7 @@ $genders = __('messages.genders');
             <td>{{ $candidate->ready_to_work ? 'Готов работать' : '' }}</td>
             <td>
                 <div>
-                    <a onclick="confirmDelete(event, '{{ route('candidates.edit', $candidate->id, ['id' => $candidate->id]) }}')" class="btn btn-danger">
-                        Edit
-                    </a>
+                    <a href="{{ route('candidates.edit', $candidate->id) }}" class="btn btn-primary">Edit</a>
                 </div>
                 <div class="mt-2">
                     <a onclick="confirmDelete(event, '{{ route('candidates.destroy', $candidate->id, ['id' => $candidate->id]) }}')" class="btn btn-danger">

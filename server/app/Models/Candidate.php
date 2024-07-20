@@ -5,6 +5,35 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $first_name
+ * @property string $middle_name
+ * @property string $last_name
+ * @property string $gender
+ * @property string $birth_place
+ * @property string $citizenship
+ * @property int $relocation_ready
+ * @property int $salary
+ * @property string $email
+ * @property string $phone
+ * @property int $rating
+ * @property int $primary_connections
+ * @property int $builder_kr_substations
+ * @property int $builder_kr_lines
+ * @property int $mounting_parts
+ * @property int $rza
+ * @property int $asuptp
+ * @property int $askue
+ * @property int $tm
+ * @property int $ss
+ * @property int $ktsb
+ * @property string $experience_110kv
+ * @property int $ready_to_work
+ *
+ * @property DesiredPosition[] desiredPositions
+ * @property Specialization[] specializations
+ */
 class Candidate extends Model
 {
     use HasFactory;
