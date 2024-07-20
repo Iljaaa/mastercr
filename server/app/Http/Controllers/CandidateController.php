@@ -9,6 +9,7 @@ use App\Models\Candidate;
 use App\Models\DesiredPosition;
 use App\Models\Specialization;
 use App\ViewModel\CandidatesTableFilter;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
@@ -97,6 +98,7 @@ class CandidateController extends Controller
      */
     public function destroy(Candidate $candidate)
     {
-        //
+        $candidate->delete();
+        return redirect()->route('candidates.index');
     }
 }

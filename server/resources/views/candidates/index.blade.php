@@ -10,9 +10,40 @@
 
 @extends('layouts.default')
 
-@section('title', 'Login')
+@section('title', 'List')
 
 @section('content')
+
+<script>
+function confirmDelete(event, url) {
+    event.stopPropagation()
+    if (!confirm("Удалить эту запись?")) return;
+
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            // Включите токен CSRF, если требуется
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            alert('Произошла ошибка при удалении записи.');
+        }
+
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при удалении записи222.');
+    });
+
+}
+</script>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div style="border: solid 1px red">
     add button

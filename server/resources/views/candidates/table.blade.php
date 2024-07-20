@@ -29,9 +29,9 @@ $genders = __('messages.genders');
         <th style="width: 150px; min-width: 150px; vertical-align: middle">Телемеханника (ТМ)</th>
         <th style="width: 150px; min-width: 150px; vertical-align: middle">Средства связи (СС)</th>
         <th style="width: 150px; min-width: 150px; vertical-align: middle">Комплекс техниских средств безопасности (КТСБ)</th>
-
         <th style="width: 200px; min-width: 200px; vertical-align: middle">Есть ли у Вас опыт проектирования на подстанциях и воздушных линиях 110кВ?</th>
         <th style="width: 150px; min-width: 150px; vertical-align: middle">Готовность работать</th>
+        <th style="width: 200px; min-width: 200px;"></th>
     </tr>
     <tr>
         <th></th>
@@ -172,6 +172,15 @@ $genders = __('messages.genders');
                 <label class="form-check-label" for="ready_to_work">Готов</label>
             </div>
         </th>
+
+        <th style="vertical-align: top">
+            <div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+            <div class="mt-2">
+                <a href="{{ route('candidates.index') }}" type="submit" class="btn btn-secondary">Clear filters</a>
+            </div>
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -231,6 +240,18 @@ $genders = __('messages.genders');
             <td>{{ $candidate->experience_110kv }}</td>
 
             <td>{{ $candidate->ready_to_work ? 'Готов работать' : '' }}</td>
+            <td>
+                <div>
+                    <a onclick="confirmDelete(event, '{{ route('candidates.edit', $candidate->id, ['id' => $candidate->id]) }}')" class="btn btn-danger">
+                        Edit
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a onclick="confirmDelete(event, '{{ route('candidates.destroy', $candidate->id, ['id' => $candidate->id]) }}')" class="btn btn-danger">
+                        Delete
+                    </a>
+                </div>
+            </td>
         </tr>
     @endforeach
     </tbody>
