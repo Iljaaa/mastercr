@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+<div>
+    <div style="text-align: center; background-color: black">
+        <h1 style="color: white">Test task for </h1>
+    </div>
     @yield('content')
 </div>
 </body>
