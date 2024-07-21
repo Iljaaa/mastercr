@@ -164,7 +164,6 @@ $genders = __('messages.genders');
             <div>
                 <input type="text" class="form-control" name="experience_110kv" placeholder="Поиск" value="{{ request()->input('experience_110kv') }}" />
             </div>
-            <input type="submit" />
         </th>
         <th style="vertical-align: top">
             <div class="form-check">
