@@ -55,7 +55,7 @@ return new class extends Migration
         // специализации
         Schema::create('specializations', function (Blueprint $table) {
             $table->id();
-            $table->string('specialization', 250);
+            $table->string('specialization', 512);
             $table->timestamps();
         });
 
