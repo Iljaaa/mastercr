@@ -45,27 +45,30 @@ function confirmDelete(event, url) {
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<div class="container mt-2">
-    <a href="{{ route('candidates.create') }}" class="btn btn-primary">Create new candidate</a>
+<div style="display: flex; flex-direction: column; height: calc(100vh - 70px)">
+    <div class="container mt-2">
+        <a href="{{ route('candidates.create') }}" class="btn btn-primary">Create new candidate</a>
 
-    @if (session('success'))
-        <div class="alert alert-success mt-2">
-            {{ session('success') }}
-        </div>
-    @endif
-</div>
-
-<div style="overflow: scroll; height: 80vh" class="mt-2">
-    <form method="get" name="filterForm">
-        <input type="hidden" name="page" id="page" value="{{ $currentPage }}" />
-        @include('candidates.table')
-    </form>
-</div>
-
-<div class="container">
-    <div class="pagination mt-2">
-        {{ $candidates->links('candidates.pagination', ['currentPage' => $currentPage]) }}
+        @if (session('success'))
+            <div class="alert alert-success mt-2">
+                {{ session('success') }}
+            </div>
+        @endif
     </div>
+
+    <div style="flex: 1; overflow: auto; padding: 10px">
+        <form method="get" name="filterForm">
+            <input type="hidden" name="page" id="page" value="{{ $currentPage }}" />
+            @include('candidates.table')
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="pagination mt-2">
+            {{ $candidates->links('candidates.pagination', ['currentPage' => $currentPage]) }}
+        </div>
+    </div>
+
 </div>
 
 

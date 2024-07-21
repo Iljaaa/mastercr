@@ -9,8 +9,8 @@
 </head>
 <body>
 <div>
-    <div style="text-align: center; background-color: black">
-        <h1 style="color: white">Test task for </h1>
+    <div style="text-align: center; background-color: black; padding: .5rem 0">
+        <h1 style="color: white">Тестовое задание для Мастерской цифровых решений</h1>
     </div>
     @yield('content')
 </div>
